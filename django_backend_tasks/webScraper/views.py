@@ -7,11 +7,9 @@ import time
 import threading
 
 def scrape_nifty50():
-    print('---10---')
     url = 'https://www.nseindia.com/'
     headers = {
-    }
-    
+    }    
     response = requests.get(url, headers=headers)
     print('---14---',response.status_code)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -34,8 +32,8 @@ def scrape_nifty50():
 
 def schedule_scraping():
     print('----31---')
-    scrape_nifty50()
-    # schedule.every(1).seconds.do(scrape_nifty50())
+    # scrape_nifty50()
+    schedule.every(5).minutes.do(scrape_nifty50())
     while True:
         schedule.run_pending()
         time.sleep(1)
